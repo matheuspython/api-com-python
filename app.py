@@ -47,4 +47,11 @@ def incluirNovoLivro():
   livros.append(novoLivro)
   return jsonify(livros)
 
+
+@app.route('/livros/<int:id>',methods=["DELETE"])
+def excluirLivro(id):
+  for indice,livro in enumerate(livros):
+    if livro.get('id') == id:
+      del livros[indice]
+  return jsonify(livros)
 app.run(port=5000,host='localhost',debug=True)
