@@ -33,10 +33,18 @@ def obterLivroPorId(id):
 
 @app.route('/livros/<int:id>', methods=["PUT"])
 def editarLivroPorId(id):
-  livroAleterado = request.get_json()
+  livroAlterado = request.get_json()#pega o json da req do user
+
   for indice,livro in enumerate(livros):
+    # print('indice ', indice, " livro ", livro)
     if livro.get('id') == id:
-      livros[indice].update(livroAleterado)
+      livros[indice].update(livroAlterado)
       return jsonify(livros[indice])
+
+@app.route("/livros",methods=["POST"])
+def incluirNovoLivro():
+  novoLivro = request.get_json()
+  livros.append(novoLivro)
+  return jsonify(livros)
 
 app.run(port=5000,host='localhost',debug=True)
