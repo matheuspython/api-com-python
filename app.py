@@ -1,7 +1,7 @@
-from flask import Flask, jsonfy, request 
+from flask import Flask, jsonify, request
 app = Flask(__name__)
 
-livos = [
+livros = [
   { 
    'id': 1,
    'titulo': 'senhor dos aneis',
@@ -18,3 +18,12 @@ livos = [
    "autor": 'James Clear' 
   },
 ]
+
+
+#consultar todos
+@app.route('/livros')
+def obterLivros():
+  return jsonify(livros)
+
+
+app.run(port=5000,host='localhost',debug=True)
